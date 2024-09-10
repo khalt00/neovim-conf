@@ -1,0 +1,15 @@
+{
+  "suggest.autoTrigger": "always",
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.enable": true,
+  "formatOnSave": true,
+  "languageserver": {
+    "go": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "trace.server": "verbose",
+      "filetypes": ["go"]
+    }
+  },
+  "@nomicfoundation/coc-solidity.telemetry": true
+}
