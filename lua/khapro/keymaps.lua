@@ -22,3 +22,20 @@ vim.api.nvim_set_keymap('n', 'gr', '<Plug>(coc-references)', { noremap = true, s
 vim.api.nvim_set_keymap('n', 'K', '<Plug>(coc-hover)', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<leader>g', 'gD', { noremap = true, silent = true })
+
+
+vim.cmd [[
+  highlight YankHighlight guibg=#ffdd00 gui=reverse
+]]
+
+-- Create an autocommand group
+vim.api.nvim_create_augroup("highlight_yank", { clear = true })
+
+-- Highlight on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = "highlight_yank",
+  callback = function()
+    vim.highlight.on_yank({ timeout = 200 }) -- Adjust timeout as needed
+  end,
+})
+
