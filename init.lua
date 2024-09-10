@@ -5,6 +5,7 @@ require("khapro.theme")
 require("khapro.icon")
 require("khapro.harpoon")
 require("khapro.telescope")
+-- require("khapro.lsp")
 -- require("khapro.mason")
 
 -- Automatically format on save

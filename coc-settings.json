@@ -9,7 +9,14 @@
       "rootPatterns": ["go.mod"],
       "trace.server": "verbose",
       "filetypes": ["go"]
-    }
+    },
+   "solidity": {
+    "command": "nomicfoundation-solidity-language-server",
+    "args": [ "--stdio" ],
+    "rootPatterns": [".git/"],
+    "filetypes": ["solidity"]
+   } 
   },
-  "@nomicfoundation/coc-solidity.telemetry": true
+  "@nomicfoundation/coc-solidity.telemetry": true,
+  "@nomicfoundation/coc-solidity.formatter": "prettier"
 }
