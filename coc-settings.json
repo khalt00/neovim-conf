@@ -10,13 +10,51 @@
       "trace.server": "verbose",
       "filetypes": ["go"]
     },
-   "solidity": {
-    "command": "nomicfoundation-solidity-language-server",
-    "args": [ "--stdio" ],
-    "rootPatterns": [".git/"],
-    "filetypes": ["solidity"]
-   } 
+    "solidity": {
+      "command": "nomicfoundation-solidity-language-server",
+      "args": ["--stdio"],
+      "rootPatterns": [".git/"],
+      "filetypes": ["solidity"]
+    },
+    "tailwindcss": {
+      "command": "tailwindcss-language-server",
+      "args": ["--stdio"],
+      "filetypes": [
+        "html",
+        "css",
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "vue",
+        "svelte"
+      ],
+      "rootPatterns": [
+        "tailwind.config.js",
+        "tailwind.config.ts",
+        "postcss.config.js",
+        "postcss.config.ts",
+        ".git/"
+      ]
+    },
+    "tsserver": {
+      "command": "typescript-language-server",
+      "args": ["--stdio"],
+      "rootPatterns": ["package.json", "tsconfig.json", ".git/"],
+      "filetypes": [
+        "typescript",
+        "typescriptreact",
+        "javascript",
+        "javascriptreact"
+      ]
+    }
   },
   "@nomicfoundation/coc-solidity.telemetry": true,
-  "@nomicfoundation/coc-solidity.formatter": "prettier"
+  "@nomicfoundation/coc-solidity.formatter": "prettier",
+  "tailwindCSS.includeLanguages": {
+    "typescript": "typescriptreact"
+  },
+  "typescript.format.enable": true,
+  "typescript.suggest.autoImports": true,
+  "typescript.preferences.importModuleSpecifier": "relative"
 }

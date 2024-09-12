@@ -39,3 +39,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+-- Visual replace without overwriting the default register
+vim.keymap.set("x", "<leader>p", [["_dP]])
+-- code suggestion => enter
+vim.api.nvim_set_keymap('i', '<CR>', [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], { noremap = true, expr = true, silent = true })
