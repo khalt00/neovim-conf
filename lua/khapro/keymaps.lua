@@ -22,7 +22,7 @@ vim.api.nvim_set_keymap('n', 'gr', '<Plug>(coc-references)', { noremap = true, s
 vim.api.nvim_set_keymap('n', 'K', '<Plug>(coc-hover)', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<leader>g', 'gD', { noremap = true, silent = true })
-
+vim.api.nvim_set_keymap('n', '<leader>q', ':lua vim.fn.CocActionAsync("doHover")<CR>', { noremap = true, silent = true })
 
 vim.cmd [[
   highlight YankHighlight guibg=#ffdd00 gui=reverse

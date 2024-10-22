@@ -8,7 +8,11 @@
       "command": "gopls",
       "rootPatterns": ["go.mod"],
       "trace.server": "verbose",
-      "filetypes": ["go"]
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "usePlaceholders": true, // Enable placeholders for auto-completion
+        "completeUnimported": true // Enable auto-imports for packages
+      }
     },
     "solidity": {
       "command": "nomicfoundation-solidity-language-server",
