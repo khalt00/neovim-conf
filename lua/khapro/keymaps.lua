@@ -24,6 +24,9 @@ vim.api.nvim_set_keymap('n', 'K', '<Plug>(coc-hover)', { noremap = true, silent 
 vim.api.nvim_set_keymap('n', '<leader>g', 'gD', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>q', ':lua vim.fn.CocActionAsync("doHover")<CR>', { noremap = true, silent = true })
 
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+
 vim.cmd [[
   highlight YankHighlight guibg=#ffdd00 gui=reverse
 ]]

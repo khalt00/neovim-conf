@@ -16,9 +16,16 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--   pattern = "*.go",
+--   callback = function()
+--     vim.fn.CocAction('runCommand', 'editor.action.organizeImport')
+--   end
+-- })
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.go",
   callback = function()
-    vim.fn.CocAction('runCommand', 'editor.action.organizeImport')
-  end
+    pcall(vim.fn.CocAction, 'runCommand', 'editor.action.organizeImport')
+  end,
 })
+
