@@ -5,8 +5,8 @@ require("nvim-tree").setup {
     width = 30,               -- Width of the file explorer
     side = "left",            -- File explorer on the left
   },
-	git = {
-	ignore = false,
-	},
+  git = {
+    ignore = false,
+  },
 }
 

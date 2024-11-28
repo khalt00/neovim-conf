@@ -1,39 +1,13 @@
-vim.cmd.colorscheme "catppuccin"
+-- Path to the file where the selected colorscheme will be stored
+local colorscheme_file = vim.fn.stdpath('config') .. '/colorscheme.txt'
 
--- local colorschemes = { 
---     "blue", "catppuccin", "catppuccin-frappe", "catppuccin-latte", 
---     "catppuccin-macchiato", "catppuccin-mocha", "darkblue", "default", 
---     "delek", "desert", "elflord", "evening", "habamax", "industry", 
---     "koehler", "lunaperche", "morning", "murphy", "pablo", 
---     "peachpuff", "quiet", "retrobox", "ron", "shine", "slate", 
---     "sorbet", "torte", "vim", "wildcharm", "zaibatsu", "zellner" 
--- }
---
--- local current_index = 1 -- Start with the first colorscheme
---
--- -- Function to toggle colorschemes
--- local function toggle_colorscheme()
---     -- Get the current colorscheme and set it
---     local current_colorscheme = colorschemes[current_index]
---     vim.cmd("colorscheme " .. current_colorscheme)
---
---     -- Print the currently applied colorscheme
---     print("Colorscheme set to: " .. current_colorscheme)
---
---     -- Move to the next colorscheme in the list
---     current_index = (current_index % #colorschemes) + 1
--- end
---
--- -- Keybinding to toggle colorschemes
--- vim.keymap.set("n", "<leader>tc", toggle_colorscheme, { noremap = true, silent = true })
---
 local colorschemes = { 
     "blue", "catppuccin", "catppuccin-frappe", "catppuccin-latte", 
     "catppuccin-macchiato", "catppuccin-mocha", "darkblue", "default", 
     "delek", "desert", "elflord", "evening", "habamax", "industry", 
     "koehler", "lunaperche", "morning", "murphy", "pablo", 
     "peachpuff", "quiet", "retrobox", "ron", "shine", "slate", 
-    "sorbet", "torte", "vim", "wildcharm", "zaibatsu", "zellner" 
+    "sorbet", "torte", "vim", "wildcharm", "zaibatsu", "zellner"
 }
 
 local telescope = require('telescope')
@@ -62,14 +36,29 @@ local function pick_colorscheme()
                 local selection = action_state.get_selected_entry()
                 actions.close(prompt_bufnr)
                 if selection then
+                    -- Save the selected colorscheme to file
+                    vim.fn.writefile({selection[1]}, colorscheme_file)
                     vim.cmd("colorscheme " .. selection[1])
                     print("Colorscheme set to: " .. selection[1])
                 end
             end)
 
-            -- Update colorscheme on hover
-            map('i', '<Tab>', preview_colorscheme)
-            map('n', '<Tab>', preview_colorscheme)
+	  -- Apply theme temporarily on arrow key navigation
+            map('i', '<Down>', function()
+                actions.move_selection_next(prompt_bufnr)
+                local selection = action_state.get_selected_entry()
+                if selection then
+                    preview_colorscheme(selection[1])
+                end
+            end)
+
+            map('i', '<Up>', function()
+                actions.move_selection_previous(prompt_bufnr)
+                local selection = action_state.get_selected_entry()
+                if selection then
+                    preview_colorscheme(selection[1])
+                end
+            end)
 
             -- Automatically preview as selection changes
             actions.select_default:replace(function()
@@ -83,3 +72,16 @@ end
 
 -- Keybinding to open the colorscheme picker
 vim.keymap.set("n", "<leader>tc", pick_colorscheme, { noremap = true, silent = true })
+
+-- Load the colorscheme when vim starts
+local function load_colorscheme()
+    local theme = vim.fn.readfile(colorscheme_file)
+    if #theme > 0 then
+        vim.cmd("colorscheme " .. theme[1])
+    else
+        vim.cmd("colorscheme catppuccin") -- Default theme if none is saved
+    end
+end
+
+-- Call the function to load the colorscheme at startup
+load_colorscheme()
