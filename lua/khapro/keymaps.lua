@@ -24,8 +24,25 @@ vim.api.nvim_set_keymap('n', 'K', '<Plug>(coc-hover)', { noremap = true, silent 
 vim.api.nvim_set_keymap('n', '<leader>g', 'gD', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>q', ':lua vim.fn.CocActionAsync("doHover")<CR>', { noremap = true, silent = true })
 
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+-- diagnostic
+
+-- Diagnostic Mappings
+local diagnostic_goto = function(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go({ severity = severity })
+  end
+end
+
+-- Diagnostic key mappings
+vim.api.nvim_set_keymap('n', '<leader>cd', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true, desc = 'Line Diagnostics' })
+vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true, desc = 'Next Diagnostic' })
+vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true, desc = 'Prev Diagnostic' })
+vim.api.nvim_set_keymap('n', ']e', '<cmd>lua vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })<CR>', { noremap = true, silent = true, desc = 'Next Error' })
+vim.api.nvim_set_keymap('n', '[e', '<cmd>lua vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })<CR>', { noremap = true, silent = true, desc = 'Prev Error' })
+vim.api.nvim_set_keymap('n', ']w', '<cmd>lua vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.WARN })<CR>', { noremap = true, silent = true, desc = 'Next Warning' })
+vim.api.nvim_set_keymap('n', '[w', '<cmd>lua vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARN })<CR>', { noremap = true, silent = true, desc = 'Prev Warning' })
 
 vim.cmd [[
   highlight YankHighlight guibg=#ffdd00 gui=reverse
