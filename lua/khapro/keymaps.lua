@@ -24,6 +24,7 @@ vim.api.nvim_set_keymap('n', 'K', '<Plug>(coc-hover)', { noremap = true, silent 
 vim.api.nvim_set_keymap('n', '<leader>g', 'gD', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>q', ':lua vim.fn.CocActionAsync("doHover")<CR>', { noremap = true, silent = true })
 
+
 -- diagnostic
 
 -- Diagnostic Mappings
@@ -35,14 +36,9 @@ local diagnostic_goto = function(next, severity)
   end
 end
 
--- Diagnostic key mappings
-vim.api.nvim_set_keymap('n', '<leader>cd', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true, desc = 'Line Diagnostics' })
-vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true, desc = 'Next Diagnostic' })
-vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true, desc = 'Prev Diagnostic' })
-vim.api.nvim_set_keymap('n', ']e', '<cmd>lua vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })<CR>', { noremap = true, silent = true, desc = 'Next Error' })
-vim.api.nvim_set_keymap('n', '[e', '<cmd>lua vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })<CR>', { noremap = true, silent = true, desc = 'Prev Error' })
-vim.api.nvim_set_keymap('n', ']w', '<cmd>lua vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.WARN })<CR>', { noremap = true, silent = true, desc = 'Next Warning' })
-vim.api.nvim_set_keymap('n', '[w', '<cmd>lua vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARN })<CR>', { noremap = true, silent = true, desc = 'Prev Warning' })
+vim.api.nvim_set_keymap("n", "[d", "<Plug>(coc-diagnostic-prev)", { silent = true })
+vim.api.nvim_set_keymap("n", "]d", "<Plug>(coc-diagnostic-next)", { silent = true })
+vim.api.nvim_set_keymap("n", "<leader>d", ":CocDiagnostics<CR>", { noremap = true, silent = true })
 
 vim.cmd [[
   highlight YankHighlight guibg=#ffdd00 gui=reverse
@@ -63,3 +59,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.keymap.set("x", "<leader>p", [["_dP]])
 -- code suggestion => enter
 vim.api.nvim_set_keymap('i', '<CR>', [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], { noremap = true, expr = true, silent = true })
+
+-- collapse
+vim.api.nvim_set_keymap("n", "<leader>f", "zfa}", { noremap = true, silent = true })
+
+-- quickfix
+-- vim.api.nvim_set_keymap("n", "<leader>fi", ":CocCommand editor.action.quickFix<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>ca", "<Plug>(coc-codeaction)", { silent = true })
+vim.api.nvim_set_keymap("n", "<C-Space>", "<Plug>(coc-codeaction)", { silent = true })
+

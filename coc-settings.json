@@ -10,8 +10,8 @@
       "trace.server": "verbose",
       "filetypes": ["go"],
       "initializationOptions": {
-        "usePlaceholders": true, // Enable placeholders for auto-completion
-        "completeUnimported": true // Enable auto-imports for packages
+        "usePlaceholders": true,
+        "completeUnimported": true
       }
     },
     "solidity": {
