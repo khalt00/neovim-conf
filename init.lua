@@ -26,11 +26,17 @@ vim.diagnostic.config({
   update_in_insert = false, -- Update diagnostics only after insert mode
   severity_sort = true, -- Sort by severity
 })
-
-vim.opt.tabstop =4       -- Number of spaces that a <Tab> counts for
+vim.o.winblend = 30
+vim.opt.tabstop = 4       -- Number of spaces that a <Tab> counts for
 vim.opt.shiftwidth = 4    -- Number of spaces to use for each step of (auto)indent
 vim.opt.expandtab = true  -- Convert tabs to spaces
 vim.opt.autoindent = true -- Copy indent from the current line when starting a new line
+
+
+vim.cmd([[
+  highlight CursorLine cterm=NONE ctermbg=DarkGray guibg=#3c3c3c
+]])
+
 -- vim.api.nvim_create_autocmd("BufWritePre", {
 --   pattern = "*.go",
 --   callback = function()

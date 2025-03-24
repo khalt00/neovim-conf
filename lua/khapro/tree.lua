@@ -18,5 +18,9 @@ require("nvim-tree").setup {
   git = {
     ignore = false,
   },
+  update_focused_file = {
+    enable = true,  -- Enable file syncing
+    update_cwd = true, -- Update working directory
+  },
 }
 

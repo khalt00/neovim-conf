@@ -24,9 +24,6 @@ vim.api.nvim_set_keymap('n', 'K', '<Plug>(coc-hover)', { noremap = true, silent 
 vim.api.nvim_set_keymap('n', '<leader>g', 'gD', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>q', ':lua vim.fn.CocActionAsync("doHover")<CR>', { noremap = true, silent = true })
 
-
--- diagnostic
-
 -- Diagnostic Mappings
 local diagnostic_goto = function(next, severity)
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
@@ -64,7 +61,5 @@ vim.api.nvim_set_keymap('i', '<CR>', [[coc#pum#visible() ? coc#pum#confirm() : "
 vim.api.nvim_set_keymap("n", "<leader>f", "zfa}", { noremap = true, silent = true })
 
 -- quickfix
--- vim.api.nvim_set_keymap("n", "<leader>fi", ":CocCommand editor.action.quickFix<CR>", { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "<leader>ca", "<Plug>(coc-codeaction)", { silent = true })
 vim.api.nvim_set_keymap("n", "<C-Space>", "<Plug>(coc-codeaction)", { silent = true })
 
